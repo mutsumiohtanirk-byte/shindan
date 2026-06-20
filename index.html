@@ -1,1 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>兄弟喧嘩レスキュー診断</title>
+<link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Zen Maru Gothic', sans-serif; background: #FBF7F2; min-height: 100vh; padding-bottom: 3rem; }
+.header { background: #fff; border-bottom: 0.5px solid #EDE8E0; padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
+.badge { font-size: 10px; background: #F5EDD9; color: #9A6C2E; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+.screen { display: none; }
+.screen.active { display: block; }
+.hero-img { width: 100%; height: auto; display: block; max-height: 380px; object-fit: contain; background: #F5F3EF; }
+.hero-text { background: #fff; padding: 1.25rem 1.25rem 1rem; border-bottom: 0.5px solid #EDE8E0; }
+.hero-title { font-family: 'Kiwi Maru', serif; font-size: 18px; color: #5A3E20; font-weight: 500; line-height: 1.6; margin-bottom: 0.5rem; }
+.hero-sub { font-size: 12px; color: #A08060; }
+.start-wrap { padding: 1.25rem 1rem 0; }
+.start-btn { display: block; width: 100%; padding: 1rem; border-radius: 14px; background: #C9984A; color: #fff; font-family: 'Kiwi Maru', serif; font-size: 16px; font-weight: 500; text-align: center; border: none; cursor: pointer; }
+.start-btn:hover { background: #B5823A; }
+.q-img { width: 100%; height: auto; display: block; max-height: 360px; object-fit: contain; background: #F5F3EF; }
+.progress-wrap { padding: 0.9rem 1rem 0; }
+.progress-bar { height: 5px; background: #EDE8E0; border-radius: 5px; overflow: hidden; }
+.progress-fill { height: 100%; background: #C9984A; border-radius: 5px; transition: width 0.35s ease; }
+.progress-label { font-size: 11px; color: #A08060; text-align: right; margin-top: 4px; }
+.card { background: #fff; margin: 1rem 1rem 0; border-radius: 20px; padding: 1.5rem 1.25rem; border: 0.5px solid #EDE8E0; }
+.step-num { font-size: 11px; color: #B09070; text-align: center; margin-bottom: 0.4rem; font-weight: 500; letter-spacing: 0.05em; }
+.q-title { font-family: 'Kiwi Maru', serif; font-size: 15px; color: #5A3E20; text-align: center; margin-bottom: 1.1rem; line-height: 1.65; }
+.choice-btn { display: block; width: 100%; padding: 0.85rem 1rem; margin-bottom: 0.55rem; border: 1.5px solid #E8DDCC; border-radius: 14px; background: #fff; text-align: left; font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; color: #5A3E20; cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+.choice-btn:hover { background: #FBF4E6; border-color: #C9A97A; }
+.choice-btn:last-child { margin-bottom: 0; }
+.result-img { width: 100%; height: auto; display: block; max-height: 360px; object-fit: contain; background: #F5F3EF; }
+.result-card { background: #fff; margin: 1rem 1rem 0; border-radius: 20px; padding: 1.5rem 1.25rem; border: 0.5px solid #EDE8E0; }
+.result-type { font-size: 12px; color: #9A6C2E; font-weight: 700; background: #F5EDD9; display: inline-block; padding: 4px 14px; border-radius: 20px; margin-bottom: 0.75rem; }
+.result-title { font-family: 'Kiwi Maru', serif; font-size: 18px; color: #5A3E20; margin-bottom: 1rem; line-height: 1.5; }
+.result-body { font-size: 14px; color: #7A5C3A; line-height: 1.85; margin-bottom: 1.4rem; }
+.result-cta-label { font-size: 13px; color: #A08060; text-align: center; margin-bottom: 0.6rem; line-height: 1.8; }
+.cta-btn { display: block; width: 100%; padding: 1rem; border-radius: 14px; background: #C9984A; color: #fff; font-family: 'Kiwi Maru', serif; font-size: 15px; font-weight: 500; text-align: center; border: none; cursor: pointer; text-decoration: none; }
+.cta-btn:hover { background: #B5823A; }
+</style>
+</head>
+<body>
+<div class="header">
+  <img src="images/logo.png" alt="Nicotto Project" style="height:36px;width:auto;">
+  <span class="badge">発達科学コミュニケーション</span>
+</div>
+ 
+<!-- 表紙 -->
+<div id="screen-top" class="screen active">
+  <img class="hero-img" src="images/top.png" alt="仲良く遊ぶ兄弟とお母さん">
+  <div class="hero-text">
+    <p class="hero-title">「兄弟喧嘩ばかりで疲れた」<br>ママのレスキュー診断</p>
+    <p class="hero-sub">〜親子の悪循環を抜け出して心から笑い合える毎日へ〜</p>
+  </div>
+  <div class="start-wrap">
+    <button class="start-btn" onclick="showQ(1)">診断スタート →</button>
+  </div>
+</div>
+ 
+<!-- 質問1 -->
+<div id="screen-1" class="screen">
+  <img class="q-img" src="images/q1.png" alt="兄弟が喧嘩">
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
+    <div class="progress-label">1 / 4</div>
+  </div>
+  <div class="card">
+    <div class="step-num">質問 1 / 4</div>
+    <p class="q-title">きょうだい喧嘩が一番<br>激しくなるのはいつですか？</p>
+    <button class="choice-btn" onclick="ans(1,'朝');showQ(2)">🌅 朝、登園・登校前</button>
+    <button class="choice-btn" onclick="ans(1,'夕方');showQ(2)">🌆 夕方〜夕食前</button>
+    <button class="choice-btn" onclick="ans(1,'夜');showQ(2)">🌙 夜・寝る前</button>
+    <button class="choice-btn" onclick="ans(1,'休日');showQ(2)">☀️ 休日</button>
+  </div>
+</div>
+ 
+<!-- 質問2 -->
+<div id="screen-2" class="screen">
+  <img class="q-img" src="images/q2.png" alt="癇癪を起こす男の子">
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
+    <div class="progress-label">2 / 4</div>
+  </div>
+  <div class="card">
+    <div class="step-num">質問 2 / 4</div>
+    <p class="q-title">お子さんの荒れ方は<br>どんな感じですか？</p>
+    <button class="choice-btn" onclick="ans(2,'暴力');showQ(3)">👊 叩く・蹴るなど手が出る</button>
+    <button class="choice-btn" onclick="ans(2,'暴言');showQ(3)">💢 暴言が出て止まらない</button>
+    <button class="choice-btn" onclick="ans(2,'ちょっかい');showQ(3)">😤 しつこいちょっかい</button>
+    <button class="choice-btn" onclick="ans(2,'癇癪');showQ(3)">😭 癇癪で泣き叫ぶ</button>
+  </div>
+</div>
+ 
+<!-- 質問3 -->
+<div id="screen-3" class="screen">
+  <img class="q-img" src="images/q3.png" alt="外ではいい子・家では荒れる対比">
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" style="width:75%"></div></div>
+    <div class="progress-label">3 / 4</div>
+  </div>
+  <div class="card">
+    <div class="step-num">質問 3 / 4</div>
+    <p class="q-title">外での様子はどうですか？</p>
+    <button class="choice-btn" onclick="ans(3,'いい子');showQ(4)">😇 外では「いい子」と言われる</button>
+    <button class="choice-btn" onclick="ans(3,'トラブル');showQ(4)">😠 外でもトラブルが多い</button>
+  </div>
+</div>
+ 
+<!-- 質問4 -->
+<div id="screen-4" class="screen">
+  <img class="q-img" src="images/q4.png" alt="疲れ果てたお母さん">
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+    <div class="progress-label">4 / 4</div>
+  </div>
+  <div class="card">
+    <div class="step-num">質問 4 / 4</div>
+    <p class="q-title">いまの正直な気持ちは？</p>
+    <button class="choice-btn" onclick="ans(4,'自己嫌悪');showResult()">😔 自分を責めてしまう</button>
+    <button class="choice-btn" onclick="ans(4,'辛い');showResult()">😢 毎日見ていて辛い</button>
+    <button class="choice-btn" onclick="ans(4,'限界');showResult()">🤯 もうどうしていいか分からない</button>
+  </div>
+</div>
+ 
+<!-- 結果 -->
+<div id="screen-result" class="screen">
+  <img class="result-img" id="result-img" src="images/r1.png" alt="診断結果イラスト">
+  <div class="result-card">
+    <div><span class="result-type" id="r-type"></span></div>
+    <p class="result-title" id="r-title"></p>
+    <p class="result-body" id="r-body"></p>
+    <p class="result-cta-label">より詳しいタイプ診断と<br>お子さん専用のサポートプランは<br>こちらからお受け取りください。</p>
+    <a href="https://www.agentmail.jp/lp/r/23619/188924/?app" class="cta-btn">個別相談を申し込む →</a>
+  </div>
+</div>
+ 
+<script>
+var answers = {};
+ 
+var RESULTS = {
+  '暴力_いい子':        { img:'images/r1.png', type:'脳のエネルギー切れタイプ',    title:'外でのがんばりが、家で爆発しています',         body:'外でのがんばりが限界に達して、家で爆発している状態です。叩いたり蹴ったりは「助けて」のサインです。ストレスを抜きながら、気持ちを言葉で伝える力を育ててあげると、兄弟喧嘩も落ち着いていきます。' },
+  '暴言_いい子':        { img:'images/r2.png', type:'感情の出口不足タイプ',        title:'言葉を飲み込みすぎて、限界を迎えています',     body:'外でずっと言葉を飲み込んで耐えています。「バカ！」といった暴言は、本音をまだうまく言葉にできないだけ。本音を代弁してあげると、言葉で伝えることが上手になって、兄弟喧嘩も落ち着いていきます。' },
+  'ちょっかい_いい子':  { img:'images/r3.png', type:'つながり不足タイプ',          title:'「見てほしい」が喧嘩になっています',           body:'外で一人でがんばりすぎて、家に帰るとお母さんや兄弟とつながりたくて仕方なくなっています。喧嘩が起こっていない時に「ごはん食べてるね」「手を洗ったんだね」と声かけを増やすと、安心感で兄弟喧嘩も落ち着いていきます。' },
+  '癇癪_いい子':        { img:'images/r4.png', type:'感情の洪水タイプ',            title:'がんばりすぎた感情が、一気に溢れ出しています', body:'外でずっと感情を抑えてがんばっているので、家に帰ると感情のダムが決壊してしまう状態です。ストレスを抜いて、気持ちを切り替える力を伸ばすと、癇癪も兄弟喧嘩も落ち着いていきます。' },
+  '暴力_トラブル':      { img:'images/r5.png', type:'感情調整サポート必要タイプ', title:'感情のブレーキが効きにくい状態です',           body:'外でも家でも感情のブレーキが効きにくい状態です。ストレスを感じやすい脳になっているので、兄弟喧嘩をしていない時の肯定的な関わりで、ストレスを抜いてあげると、兄弟喧嘩も落ち着いていきます。' },
+  '暴言_トラブル':      { img:'images/r6.png', type:'ストレス過負荷タイプ',        title:'どこにいてもストレスが溢れています',           body:'どこにいてもストレスが溢れている状態です。「バカ！」といった暴言は、本音をまだうまく言葉にできないだけ。本音を代弁してあげると、言葉で伝えることが上手になって、兄弟喧嘩も落ち着いていきます。' },
+  'ちょっかい_トラブル':{ img:'images/r7.png', type:'刺激探しタイプ',              title:'脳が常に刺激を求めています',                   body:'脳が常に刺激を求めている状態です。喧嘩が起こっていない時に「ごはん食べてるね」「手を洗ったんだね」と声かけを増やすと、「お母さんが見てくれている」安心感で兄弟喧嘩も落ち着いていきます。' },
+  '癇癪_トラブル':      { img:'images/r8.png', type:'感情調整サポート必要タイプ', title:'感情のブレーキが効きにくい状態です',           body:'どこにいても感情が溢れやすい状態です。癇癪で泣き叫ぶのは「どうすればいいか分からない」という脳のSOS。叱るより、落ち着いている時に肯定的な関わりを増やすことで、感情をコントロールする力が育っていきます。' }
+};
+ 
+function ans(q, val) { answers[q] = val; }
+ 
+function showQ(n) {
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById('screen-' + n).classList.add('active');
+  window.scrollTo(0, 0);
+}
+ 
+function showResult() {
+  var key = answers[2] + '_' + answers[3];
+  var r = RESULTS[key] || RESULTS['暴力_いい子'];
+  document.getElementById('result-img').src = r.img;
+  document.getElementById('r-type').textContent = r.type;
+  document.getElementById('r-title').textContent = r.title;
+  document.getElementById('r-body').textContent = r.body;
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById('screen-result').classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
+ 
+
+
 
