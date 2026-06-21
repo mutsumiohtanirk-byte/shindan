@@ -36,6 +36,8 @@ body { font-family: 'Zen Maru Gothic', sans-serif; background: #FBF7F2; min-heig
 .result-title { font-family: 'Kiwi Maru', serif; font-size: 18px; color: #5A3E20; margin-bottom: 1rem; line-height: 1.5; }
 .result-body { font-size: 14px; color: #7A5C3A; line-height: 1.85; margin-bottom: 1.4rem; }
 .result-cta-label { font-size: 13px; color: #A08060; text-align: center; margin-bottom: 0.6rem; line-height: 1.8; }
+.restart-btn { display: block; width: 100%; padding: 0.85rem; border-radius: 14px; background: #fff; color: #C9984A; font-family: 'Kiwi Maru', serif; font-size: 14px; font-weight: 500; text-align: center; border: 1.5px solid #C9984A; cursor: pointer; margin-top: 0.75rem; }
+.restart-btn:hover { background: #FBF4E6; }
 .tip-box { background: #FBF4E6; border-radius: 14px; padding: 1rem 1.25rem; margin-bottom: 1.4rem; border: 1px solid #E8DDCC; }
 .tip-label { font-size: 13px; color: #9A6C2E; font-weight: 700; margin-bottom: 0.5rem; }
 .cta-btn { display: block; width: 100%; padding: 1rem; border-radius: 14px; background: #C9984A; color: #fff; font-family: 'Kiwi Maru', serif; font-size: 15px; font-weight: 500; text-align: center; border: none; cursor: pointer; text-decoration: none; }
@@ -138,6 +140,7 @@ body { font-family: 'Zen Maru Gothic', sans-serif; background: #FBF7F2; min-heig
     </div>
     <p class="result-cta-label">より詳しいタイプ診断と<br>お子さん専用のサポートプランは<br>こちらからお受け取りください。</p>
     <a href="https://www.agentmail.jp/lp/r/23619/188924/?app" class="cta-btn">個別相談を申し込む →</a>
+    <button onclick="restart()" class="restart-btn">もう一度診断する</button>
   </div>
 </div>
  
@@ -155,6 +158,12 @@ var RESULTS = {
   '癇癪_トラブル':      { img:'files/r8.png',  type:'感情ぜんぶ出しタイプ',        title:'感情のブレーキが効きにくい状態です',           body:'どこにいても感情が溢れやすい状態です。癇癪で泣き叫ぶのは「どうすればいいか分からない」という脳のSOSです。',                                                                               tip:'叱るより、兄弟で仲良く遊んでいる時に「仲良くしてるね」と声をかけると、兄弟喧嘩が落ち着いていきます。' }
 };
  
+function restart() {
+  Object.keys(answers).forEach(function(k){ delete answers[k]; });
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById('screen-top').classList.add('active');
+  window.scrollTo(0, 0);
+}
 function ans(q, val) { answers[q] = val; }
  
 function showQ(n) {
@@ -179,5 +188,6 @@ function showResult() {
 </body>
 </html>
  
+
 
 
