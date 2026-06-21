@@ -45,7 +45,7 @@ body { font-family: 'Zen Maru Gothic', sans-serif; background: #FBF7F2; min-heig
   <img src="files/logo.png" alt="Nicotto Project" style="height:36px;width:auto;">
   <span class="badge">発達科学コミュニケーション</span>
 </div>
- 
+
 <!-- 表紙 -->
 <div id="screen-top" class="screen active">
   <img class="hero-img" src="files/top.png" alt="仲良く遊ぶ兄弟とお母さん">
@@ -57,7 +57,7 @@ body { font-family: 'Zen Maru Gothic', sans-serif; background: #FBF7F2; min-heig
     <button class="start-btn" onclick="showQ(1)">診断スタート →</button>
   </div>
 </div>
- 
+
 <!-- 質問1 -->
 <div id="screen-1" class="screen">
   <img class="q-img" src="files/q1.png" alt="兄弟が喧嘩">
@@ -74,7 +74,7 @@ body { font-family: 'Zen Maru Gothic', sans-serif; background: #FBF7F2; min-heig
     <button class="choice-btn" onclick="ans(1,'休日');showQ(2)">☀️ 休日</button>
   </div>
 </div>
- 
+
 <!-- 質問2 -->
 <div id="screen-2" class="screen">
   <img class="q-img" src="files/q2.png" alt="癇癪を起こす男の子">
@@ -91,7 +91,7 @@ body { font-family: 'Zen Maru Gothic', sans-serif; background: #FBF7F2; min-heig
     <button class="choice-btn" onclick="ans(2,'癇癪');showQ(3)">😭 癇癪で泣き叫ぶ</button>
   </div>
 </div>
- 
+
 <!-- 質問3 -->
 <div id="screen-3" class="screen">
   <img class="q-img" src="files/q3.png" alt="外ではいい子・家では荒れる対比">
@@ -106,7 +106,7 @@ body { font-family: 'Zen Maru Gothic', sans-serif; background: #FBF7F2; min-heig
     <button class="choice-btn" onclick="ans(3,'トラブル');showQ(4)">😠 外でもトラブルが多い</button>
   </div>
 </div>
- 
+
 <!-- 質問4 -->
 <div id="screen-4" class="screen">
   <img class="q-img" src="files/q4.png" alt="疲れ果てたお母さん">
@@ -122,7 +122,7 @@ body { font-family: 'Zen Maru Gothic', sans-serif; background: #FBF7F2; min-heig
     <button class="choice-btn" onclick="ans(4,'限界');showResult()">🤯 もうどうしていいか分からない</button>
   </div>
 </div>
- 
+
 <!-- 結果 -->
 <div id="screen-result" class="screen">
   <img class="result-img" id="result-img" src="files/r1.png" alt="診断結果イラスト">
@@ -134,10 +134,10 @@ body { font-family: 'Zen Maru Gothic', sans-serif; background: #FBF7F2; min-heig
     <a href="https://www.agentmail.jp/lp/r/23619/188924/?app" class="cta-btn">個別相談を申し込む →</a>
   </div>
 </div>
- 
+
 <script>
 var answers = {};
- 
+
 var RESULTS = {
   '暴力_いい子':        { img:'files/r1.png',  type:'脳のエネルギーからっぽタイプ', title:'外でのがんばりが、家で爆発しています',         body:'外でのがんばりが限界に達して、家で爆発している状態です。叩いたり蹴ったりは「助けて」のサインです。ストレスを抜きながら、気持ちを言葉で伝える力を育ててあげると、兄弟喧嘩も落ち着いていきます。' },
   '暴言_いい子':        { img:'files/r2.png',  type:'気持ちが迷子タイプ',          title:'言葉を飲み込みすぎて、限界を迎えています',     body:'外でずっと言葉を飲み込んで耐えています。「バカ！」といった暴言は、本音をまだうまく言葉にできないだけ。本音を代弁してあげると、言葉で伝えることが上手になって、兄弟喧嘩も落ち着いていきます。' },
@@ -148,15 +148,15 @@ var RESULTS = {
   'ちょっかい_トラブル':{ img:'files/r7.png',  type:'脳のアクセル全開タイプ',      title:'脳が常に刺激を求めています',                   body:'脳が常に刺激を求めている状態です。喧嘩が起こっていない時に「ごはん食べてるね」「手を洗ったんだね」と声かけを増やすと、「お母さんが見てくれている」安心感で兄弟喧嘩も落ち着いていきます。' },
   '癇癪_トラブル':      { img:'files/r8.png',  type:'感情ぜんぶ出しタイプ',        title:'感情のブレーキが効きにくい状態です',           body:'どこにいても感情が溢れやすい状態です。癇癪で泣き叫ぶのは「どうすればいいか分からない」という脳のSOS。叱るより、落ち着いている時に肯定的な関わりを増やすことで、感情をコントロールする力が育って、兄弟喧嘩も落ち着いていきます。' }
 };
- 
+
 function ans(q, val) { answers[q] = val; }
- 
+
 function showQ(n) {
   document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
   document.getElementById('screen-' + n).classList.add('active');
   window.scrollTo(0, 0);
 }
- 
+
 function showResult() {
   var key = answers[2] + '_' + answers[3];
   var r = RESULTS[key] || RESULTS['暴力_いい子'];
@@ -171,6 +171,3 @@ function showResult() {
 </script>
 </body>
 </html>
- 
-
-
