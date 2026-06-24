@@ -167,16 +167,8 @@ function showResult() {
   var r = RESULTS[key] || RESULTS['暴力_いい子'];
   var q1c = Q1_COMMENTS[answers[1]] || '';
   var q4c = Q4_COMMENTS[answers[4]] || '';
-  var fullBody = (q1c ? q1c + '
- 
-' : '') + r.body_mid + (q4c ? '
- 
-' + q4c : '') + '
- 
-' + r.tenkan;
-  var fullTip = r.tip_kodo + '
- 
-' + r.tip_anshin;
+  var fullBody = (q1c ? q1c + '\n\n' : '') + r.body_mid + (q4c ? '\n\n' + q4c : '') + '\n\n' + r.tenkan;
+  var fullTip = r.tip_kodo + '\n\n' + r.tip_anshin;
   document.getElementById('result-img').src = r.img;
   document.getElementById('r-type').textContent = r.type;
   document.getElementById('r-title').textContent = r.title;
