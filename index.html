@@ -164,7 +164,7 @@ function showQ(n) {
  
 function showResult() {
   var key = answers[2] + '_' + answers[3];
-  var r = RESULTS[key] || RESULTS['暴力_いい子'];
+  var r = RESULTS[key] || RESULTS["暴力_いい子"];
   var q1c = Q1_COMMENTS[answers[1]] || '';
   var q4c = Q4_COMMENTS[answers[4]] || '';
   var fullBody = (q1c ? q1c + '\n\n' : '') + r.body_mid + (q4c ? '\n\n' + q4c : '') + '\n\n' + r.tenkan;
